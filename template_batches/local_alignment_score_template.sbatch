@@ -8,11 +8,11 @@
 #SBATCH --partition main			### specify partition name where to run a job. short: 7 days limit; gtx1080: 7 days; debug: 2 hours limit and 1 job at a time
 #SBATCH --time 7-00:00:00			### limit the time of job running. Make sure it is not greater than the partition time limit!! Format: D-H:MM:SS
 #SBATCH --job-name tm_gas_met			### name of the job
-#SBATCH --output /sise/vaksler-group/IsanaRNA/Tal/logs/job-%A_%a.out			### output log for running job - %J for job number
+#SBATCH --output /groups/vaksler_group/Tal/logs/job-%A_%a.out			### output log for running job - %J for job number
 #SBATCH --mail-user=talmalu@post.bgu.ac.il	### user's email for sending job status messages
 #SBATCH --mail-type=END			### conditions for sending the email. ALL,BEGIN,END,FAIL, REQUEU, NONE
-#SBATCH --mem=24G				### ammount of RAM memory
-#SBATCH --cpus-per-task=1			### number of CPU cores
+#SBATCH --mem=32G				### ammount of RAM memory
+#SBATCH --cpus-per-task=4			### number of CPU cores
 
 ### Print some data to output file ###
 echo `date`
@@ -27,13 +27,13 @@ mkdir -p "$OUTPUT_FOLDER"
 
 
 ITTERATION=$SLURM_ARRAY_TASK_ID
-START_INDEX=
+START_INDEX=$START
 if [[ ! -z "$STEP" ]]
 then
 	START_INDEX=$(( $START + $ITTERATION * $STEP ))
 fi
 
-COMMAND=("python" "/sise/vaksler-group/IsanaRNA/Tal/python/NetworkAnalysis/Scripts/python/local_alignment_no_network.py" \
+COMMAND=("python" "/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/local_alignment_no_network.py" \
 "--protein" "$PROTEIN " \
 "--output_folder" "$OUTPUT_FOLDER" \
 "--database" "$DATABASE" \
@@ -45,4 +45,4 @@ COMMAND=("python" "/sise/vaksler-group/IsanaRNA/Tal/python/NetworkAnalysis/Scrip
 
 )
 
-$(${COMMAND[@]})
+${COMMAND[@]}

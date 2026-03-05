@@ -1,52 +1,52 @@
 import argparse
-import networkx as nx
-import networkxgmml
-import pandas as pd
-import numpy as np
-import igraph as ig
-import matplotlib.pyplot as plt
-import matplotlib.ticker as plticker
-import json
 import ast
 import os
-import glob
 import itertools
-from decimal import *
-from collections import Counter
 from functools import partial
 import importlib.util
 import sys
 
 
 def create_module(file_path, module_name):
-	spec = importlib.util.spec_from_file_location(module_name, file_path)
-	new_module = importlib.util.module_from_spec(spec)
-	sys.modules[module_name] = new_module
-	spec.loader.exec_module(new_module)
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    new_module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = new_module
+    spec.loader.exec_module(new_module)
 
-def create_modules_from_directory(directory):
-	stack = []
-	for foldername, subfolders, filenames in os.walk(directory):
-			for filename in filenames:
-				if filename.endswith(".py"):
-					file_path = os.path.join(foldername, filename)
-					module_name = f"{foldername.replace(f'{os.path.dirname(directory)}/', '')}.{os.path.splitext(filename)[0]}"
-					module_name = module_name.replace(os.path.sep, '.')
-					stack.append((file_path, module_name))
+def create_modules_from_directory(directory, root_name="tutils"):
+    stack = []
 
-	while (len(stack) > 0):
-		file_path, module_name = stack.pop(0)
-		try:
-			create_module(file_path, module_name)
-		except (ModuleNotFoundError, ImportError):
-			print(f"Module {module_name} not found. Adding to retry stack...")
-			stack.append((file_path, module_name))
+    for foldername, subfolders, filenames in os.walk(directory):
+        for filename in filenames:
+            if filename.endswith(".py"):
+                file_path = os.path.join(foldername, filename)
+                rel_path = os.path.relpath(file_path, directory)
+                module_parts = rel_path.split(os.path.sep)
+                module_parts[-1] = os.path.splitext(module_parts[-1])[0]
+                if module_parts[-1] == "__init__":
+                    module_parts = module_parts[:-1]
+                if module_parts:
+                    module_name = ".".join([root_name] + module_parts)
+                else:
+                    module_name = root_name  # Root __init__.py
 
+                stack.append((file_path, module_name))
 
-directory_path = "/home/talmalu/thesis/projects/python/tutils"
+    while stack:
+        file_path, module_name = stack.pop(0)
+        try:
+            create_module(file_path, module_name)
+        except (ModuleNotFoundError, ImportError) as e:
+            print(e)
+            print(f"Module {module_name} not found. Adding to retry stack... for {file_path}")
+            stack.append((file_path, module_name))
+
+os.environ['PYTHONPATH'] = '/groups/vaksler_group/Tal/python:' + os.environ.get('PYTHONPATH', '')
+directory_path = "/groups/vaksler_group/Tal/python/tutils"  # Replace with the path to your directory
 create_modules_from_directory(directory_path)
 
-from tutils.relevancies import *
+
+from xgmmlgraphadapter import XGMMLReader, XGMMLWriter
 from tutils.databases import UniprotDB
 
 def only_in_or_filter_network_by_attributes(graph, db, filter_dict):

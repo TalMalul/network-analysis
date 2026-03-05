@@ -22,8 +22,8 @@ echo -e "SLURM_JOB_NODELIST:\t" $SLURM_JOB_NODELIST "\n\n"
 ### Start your code below ####
 module load anaconda				### load anaconda module (must be present when working with conda environments)
 source activate NewNetworkAnalysis			### activate a conda environment, replace my_env with your conda environment
-FILES=(/sise/vaksler-group/IsanaRNA/Tal/thesis/data/proteins/at_blast/proteins_batch/*_protein)
-python /home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/python/extract_protein_genebank_data.py \
+FILES=(/groups/vaksler_group/Tal/thesis/data/proteins/at_blast/proteins_batch/*_protein)
+python /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/extract_protein_genebank_data.py \
 --proteins_file ${FILES[$SLURM_ARRAY_TASK_ID]} \
 --region_names_rule pksd acyl_transf_1 nat_sf \
 --output ${FILES[$SLURM_ARRAY_TASK_ID]}.data.json

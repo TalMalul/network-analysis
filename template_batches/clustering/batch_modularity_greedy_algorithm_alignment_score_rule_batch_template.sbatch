@@ -24,7 +24,7 @@ module load anaconda				### load anaconda module (must be present when working w
 source activate NewNetworkAnalysis			### activate a conda environment, replace my_env with your conda environment
 ALIGNMENT_SCORES=($(seq ###MIN_ALIGNMENT_SCORE### ###MAX_ALIGNMENT_SCORE###))
 mkdir -p "###OUTPUT###"
-python /home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/python/clustering/batch_modularity_greedy_algorithm_alignment_score_rule.py \
+python /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/clustering/batch_modularity_greedy_algorithm_alignment_score_rule.py \
 --protein ###PROTEIN### \
 --xgmml_file ###XGMML_FILE### \
 --database ###DATABASE### \

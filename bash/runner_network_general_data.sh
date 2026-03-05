@@ -1,7 +1,7 @@
-source /sise/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/bash/export_network_environment.sh
+source /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/bash/export_network_environment.sh
 
-TEMPLATE_BATCH_FILE="/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/template_batches/network_general_data_batch_template.sbatch"
-BATCH_RUNNER="/home/talmalu/thesis/projects/python/batch_runner.sh"
+TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/network_general_data_batch_template.sbatch"
+BATCH_RUNNER="/groups/vaksler_group/Tal/python/batch_runner.sh"
 
 POSITIONAL_ARGS=()
 DEPENDENCY=""
@@ -21,6 +21,11 @@ while [[ $# -gt 0 ]]; do
 	;;
 	-db|--database)
 		export DATABASE=$2
+		shift
+		shift
+	;;
+	-db_type|--database_type)
+		export DATABASE_TYPE=$2
 		shift
 		shift
 	;;

@@ -1,6 +1,6 @@
 
-TEMPLATE_BATCH_FILE="/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/template_batches/density_degree_decent_plot_batch_template.sbatch"
-BATCH_RUNNER="/home/talmalu/thesis/projects/python/batch_runner.sh"
+TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/density_degree_decent_plot_batch_template.sbatch"
+BATCH_RUNNER="/groups/vaksler_group/Tal/python/batch_runner.sh"
 POSITIONAL_ARGS=()
 OUT_FILE=""
 PROTEIN=""

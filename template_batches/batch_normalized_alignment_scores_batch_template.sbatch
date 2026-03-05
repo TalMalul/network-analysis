@@ -23,4 +23,4 @@ echo -e "SLURM_JOB_NODELIST:\t" $SLURM_JOB_NODELIST "\n\n"
 module load anaconda				### load anaconda module (must be present when working with conda environments)
 source activate NewNetworkAnalysis			### activate a conda environment, replace my_env with your conda environment
 FILES=(###JSON_FILES###)
-python /home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/python/normalize_alignment_scores.py ###PROTEIN### ${FILES[$SLURM_ARRAY_TASK_ID]} ###DATABASE### ###WEIGHTS###
+python /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/normalize_alignment_scores.py ###PROTEIN### ${FILES[$SLURM_ARRAY_TASK_ID]} ###DATABASE### ###WEIGHTS###

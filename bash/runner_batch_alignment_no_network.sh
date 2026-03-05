@@ -1,8 +1,8 @@
 #!/bin/bash
 
-GLOBAL_TEMPLATE_BATCH_FILE="/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/template_batches/batch_global_alignment_score_template.sbatch"
-BLAST_TEMPLATE_BATCH_FILE="/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/template_batches/batch_blast_alignment_score_template.sbatch"
-BATCH_RUNNER="/home/talmalu/thesis/projects/python/batch_runner.sh"
+GLOBAL_TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/batch_global_alignment_score_template.sbatch"
+BLAST_TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/batch_blast_alignment_score_template.sbatch"
+BATCH_RUNNER="/groups/vaksler_group/Tal/python/batch_runner.sh"
 TEMPLATE_BATCH_FILE=""
 
 PROTEIN=""

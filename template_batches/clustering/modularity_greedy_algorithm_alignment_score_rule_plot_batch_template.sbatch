@@ -22,7 +22,7 @@ echo -e "SLURM_JOB_NODELIST:\t" $SLURM_JOB_NODELIST "\n\n"
 ### Start your code below ####
 module load anaconda				### load anaconda module (must be present when working with conda environments)
 source activate NewNetworkAnalysis			### activate a conda environment, replace my_env with your conda environment
-python /home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/python/clustering/modularity_greedy_algorithm_alignment_score_rule_plot.py \
+python /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/clustering/modularity_greedy_algorithm_alignment_score_rule_plot.py \
 --protein ###PROTEIN### \
 --image_title ###IMAGE_TITLE### \
 --data_file ###DATA_FILE### \

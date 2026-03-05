@@ -43,7 +43,7 @@ def create_modules_from_directory(directory):
 			stack.append((file_path, module_name))
 
 
-directory_path = "/home/talmalu/thesis/projects/python/tutils"
+directory_path = "/groups/vaksler_group/Tal/python/tutils"
 create_modules_from_directory(directory_path)
 
 from tutils.igraph_analysis import simple_analysis

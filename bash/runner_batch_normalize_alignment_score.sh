@@ -1,6 +1,6 @@
 
-TEMPLATE_BATCH_FILE="/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/template_batches/batch_normalized_alignment_scores_batch_template.sbatch"
-BATCH_RUNNER="/home/talmalu/thesis/projects/python/batch_runner.sh"
+TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/batch_normalized_alignment_scores_batch_template.sbatch"
+BATCH_RUNNER="/groups/vaksler_group/Tal/python/batch_runner.sh"
 
 POSITIONAL_ARGS=()
 WEIGHTS=""

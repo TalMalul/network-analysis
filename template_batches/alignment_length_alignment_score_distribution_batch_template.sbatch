@@ -22,7 +22,7 @@ echo -e "SLURM_JOB_NODELIST:\t" $SLURM_JOB_NODELIST "\n\n"
 ### Start your code below ####
 module load anaconda				### load anaconda module (must be present when working with conda environments)
 source activate NewNetworkAnalysis			### activate a conda environment, replace my_env with your conda environment
-python /home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/python/alignment_length_alignment_score_distribution.py \
+python /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/alignment_length_alignment_score_distribution.py \
 --protein ###PROTEIN### \
 --json_files ###JSON_FILES### \
 --database ###DATABASE### \

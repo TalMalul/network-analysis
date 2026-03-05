@@ -24,34 +24,39 @@ def create_module(file_path, module_name):
 	sys.modules[module_name] = new_module
 	spec.loader.exec_module(new_module)
 
-def create_modules_from_directory(directory):
+def create_modules_from_directory(directory, root_name="tutils"):
 	stack = []
-	for foldername, subfolders, filenames in os.walk(directory):
-			for filename in filenames:
-				if filename.endswith(".py"):
-					file_path = os.path.join(foldername, filename)
-					module_name = f"{foldername.replace(f'{os.path.dirname(directory)}/', '')}.{os.path.splitext(filename)[0]}"
-					module_name = module_name.replace(os.path.sep, '.')
-					stack.append((file_path, module_name))
 
-	while (len(stack) > 0):
+	for foldername, subfolders, filenames in os.walk(directory):
+		for filename in filenames:
+			if filename.endswith(".py"):
+				file_path = os.path.join(foldername, filename)
+				rel_path = os.path.relpath(file_path, directory)
+				module_parts = rel_path.split(os.path.sep)
+				module_parts[-1] = os.path.splitext(module_parts[-1])[0]
+				if module_parts[-1] == "__init__":
+					module_parts = module_parts[:-1]
+				if module_parts:
+					module_name = ".".join([root_name] + module_parts)
+				else:
+					module_name = root_name  # Root __init__.py
+
+				stack.append((file_path, module_name))
+
+	while stack:
 		file_path, module_name = stack.pop(0)
 		try:
 			create_module(file_path, module_name)
-		except (ModuleNotFoundError, ImportError):
-			print(f"Module {module_name} not found. Adding to retry stack...")
+		except (ModuleNotFoundError, ImportError) as e:
+			print(e)
+			print(f"Module {module_name} not found. Adding to retry stack... for {file_path}")
 			stack.append((file_path, module_name))
 
 
-directory_path = "/home/talmalu/thesis/projects/python/tutils"
+directory_path = "/groups/vaksler_group/Tal/python/tutils"
 create_modules_from_directory(directory_path)
 
-from tutils.igraph_analysis import simple_analysis
-from tutils.clustering import ClusteringAnalysisDictionaryFactory, AnalysisDictionary
-from tutils.protein_clustering import get_graph_taxonomy_modularity
-from tutils.igraph_protein_analysis import Relevancy, RelevancyFactory
 from tutils.databases import UniprotDB
-from tutils.filters.filter_factory import FilterFactory
 
 def array_converter(value, sep=';', cast_type = str):
 	result = []

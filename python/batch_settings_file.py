@@ -13,26 +13,36 @@ def create_module(file_path, module_name):
 	sys.modules[module_name] = new_module
 	spec.loader.exec_module(new_module)
 
-def create_modules_from_directory(directory):
+def create_modules_from_directory(directory, root_name="tutils"):
 	stack = []
-	for foldername, subfolders, filenames in os.walk(directory):
-			for filename in filenames:
-				if filename.endswith(".py"):
-					file_path = os.path.join(foldername, filename)
-					module_name = f"{foldername.replace(f'{os.path.dirname(directory)}/', '')}.{os.path.splitext(filename)[0]}"
-					module_name = module_name.replace(os.path.sep, '.')
-					stack.append((file_path, module_name))
 
-	while (len(stack) > 0):
+	for foldername, subfolders, filenames in os.walk(directory):
+		for filename in filenames:
+			if filename.endswith(".py"):
+				file_path = os.path.join(foldername, filename)
+				rel_path = os.path.relpath(file_path, directory)
+				module_parts = rel_path.split(os.path.sep)
+				module_parts[-1] = os.path.splitext(module_parts[-1])[0]
+				if module_parts[-1] == "__init__":
+					module_parts = module_parts[:-1]
+				if module_parts:
+					module_name = ".".join([root_name] + module_parts)
+				else:
+					module_name = root_name  # Root __init__.py
+
+				stack.append((file_path, module_name))
+
+	while stack:
 		file_path, module_name = stack.pop(0)
 		try:
 			create_module(file_path, module_name)
-		except (ModuleNotFoundError, ImportError):
-			print(f"Module {module_name} not found. Adding to retry stack...")
+		except (ModuleNotFoundError, ImportError) as e:
+			print(e)
+			print(f"Module {module_name} not found. Adding to retry stack... for {file_path}")
 			stack.append((file_path, module_name))
 
 
-directory_path = "/home/talmalu/thesis/projects/python/tutils"
+directory_path = "/groups/vaksler_group/Tal/python/tutils"  # Replace with the path to your directory
 create_modules_from_directory(directory_path)
 
 from tutils.settings import SettingParser
@@ -54,10 +64,8 @@ def _main():
 	print("settings_file = {}".format(options.settings_file))
 	print("network_general = {}".format(options.network_general))
 	print("network_config = {}".format(options.network_config))
-    
-	os.environ['START'] = '46'
-	os.environ['END'] = '217'
-    
+	
+	
 	kwargs = {}
 	while len(unknown_args) > 0:
 		k = args.pop(0)
@@ -65,7 +73,7 @@ def _main():
 		kwargs[k] = v
 
 	
-	runner_batch_settings = '/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/bash/runner_batch_settings.sh'
+	runner_batch_settings = '/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/bash/runner_batch_settings.sh'
 	with open(options.settings_file) as json_file:
 		json_config = json.load(json_file)
 		parser = SettingParser(json_config)

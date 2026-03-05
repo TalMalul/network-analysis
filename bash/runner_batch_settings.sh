@@ -1,7 +1,7 @@
-source /sise/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/bash/export_network_environment.sh
+source /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/bash/export_network_environment.sh
 
-TEMPLATE_BATCH_FILE="/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/template_batches/batch_settings_file_template.sbatch"
-BATCH_RUNNER="/home/talmalu/thesis/projects/python/batch_runner.sh"
+TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/batch_settings_file_template.sbatch"
+BATCH_RUNNER="/groups/vaksler_group/Tal/python/batch_runner.sh"
 
 POSITIONAL_ARGS=()
 OUTPUT_FOLDER=""
@@ -11,6 +11,7 @@ MEMORY=""
 START=9350
 END=9997
 STEP=1
+SLURM_STEP=1
 ALIGNMENT="FALSE"
 while [[ $# -gt 0 ]]; do
 	case "$1" in
@@ -108,10 +109,12 @@ fi
 
 if [[ -z "$MEMORY" ]]
 then
-	MEMORY=$(du -bcs $XGMML_FILE | grep total | awk '{printf "%dG",int($1/2^30 + 1) * 6 }')
+	MEMORY=$(du -bcs $XGMML_FILE | grep total | awk '{printf "%dG",int($1/2^30 + 1) * 6}')
 fi
 
-SBATCH_COMMAND+=("-a" "0-$(( (${END} - ${START}) / ${SLURM_STEP} + ( (${END} - ${START}) % ${SLURM_STEP} > 0 ) ))")
+#SBATCH_COMMAND+=("-a" "0-$(( (${END} - ${START}) / ${SLURM_STEP} + ( (${END} - ${START}) % ${SLURM_STEP} > 0 ) ))")
+N_JOBS=$(awk -v step="$STEP" -v start="$START" -v end="$END" 'BEGIN {diff=end-start; jobs=diff/step; if (diff % step > 0) jobs++; print jobs}')
+SBATCH_COMMAND+=("-a" "0-$N_JOBS")
 
 
 SBATCH_COMMAND+=("--memory $MEMORY")

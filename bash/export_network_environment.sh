@@ -45,7 +45,8 @@ if [[ ! -z "$NETWORK_CONFIG" ]]
 then
 	export ROOT_OUTPUT=$(cat "$NETWORK_CONFIG" | python3 -c "import sys, json; print(json.load(sys.stdin)['root_output'])")
 	export PROTEIN=$(cat "$NETWORK_CONFIG" | python3 -c "import sys, json; print(json.load(sys.stdin)['protein'])")
-	export DATABASE=$(cat "$NETWORK_CONFIG" | python3 -c "import sys, json; print(json.load(sys.stdin)['database'])")
+	export DATABASE=$(cat "$NETWORK_CONFIG" | python3 -c "import sys, json; print(json.load(sys.stdin)['database']['path'])")
+	export DATABASE_TYPE=$(cat "$NETWORK_CONFIG" | python3 -c "import sys, json; print(json.load(sys.stdin)['database']['type'])")
 	export XGMML_FILE=$(cat "$NETWORK_CONFIG" | python3 -c "import sys, json; print(json.load(sys.stdin)['xgmml_file'])")
 	export ALIGNMENT_WEIGHT=$(cat "$NETWORK_CONFIG" | python3 -c "import sys, json; print(json.load(sys.stdin)['alignment_weight'])")
 	

@@ -24,7 +24,7 @@ module load anaconda				### load anaconda module (must be present when working w
 source activate NewNetworkAnalysis			### activate a conda environment, replace my_env with your conda environment
 DEGREES=($(seq ###MIN_DEGREE### ###MAX_DEGREE###))
 mkdir -p "###OUTPUT###"
-python /home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/python/batch_degree_role.py \
+python /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/batch_degree_role.py \
 --protein ###PROTEIN### \
 --database ###DATABASE### \
 --output ###OUTPUT###/${DEGREES[$SLURM_ARRAY_TASK_ID]}.json \

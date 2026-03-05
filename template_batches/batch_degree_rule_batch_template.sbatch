@@ -28,7 +28,7 @@ if [[ ! -z ${DEGREES[@]:(( $SLURM_ARRAY_TASK_ID * $STEP )):$STEP} ]]
 then 
 	mkdir -p "$OUTPUT_FOLDER"
 	PYTHON_COMMAND=("python")
-	PYTHON_COMMAND+=("/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/python/batch_degree_rule.py" \
+	PYTHON_COMMAND+=("/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/batch_degree_rule.py" \
 	"--protein" "$PROTEIN" \
 	"--xgmml_file" "$XGMML_FILE" \
 	"--output" "$OUTPUT_FOLDER/${DEGREES[@]:(( $SLURM_ARRAY_TASK_ID * $STEP )):1}_${DEGREES[@]:$(( ($SLURM_ARRAY_TASK_ID + 1) * $STEP - 1 )):1}.json" \

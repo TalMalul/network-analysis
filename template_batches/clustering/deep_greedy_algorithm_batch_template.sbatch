@@ -23,7 +23,7 @@ echo -e "SLURM_JOB_NODELIST:\t" $SLURM_JOB_NODELIST "\n\n"
 module load anaconda				### load anaconda module (must be present when working with conda environments)
 source activate NewNetworkAnalysis			### activate a conda environment, replace my_env with your conda environment
 mkdir -p ###OUTPUT_FOLDER###
-python /home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/python/clustering/deep_greedy_algorithm.py \
+python /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/clustering/deep_greedy_algorithm.py \
 --protein ###PROTEIN### \
 --database ###DATABASE### \
 --alignment_weight ###ALIGNMENT_WEIGHT### \

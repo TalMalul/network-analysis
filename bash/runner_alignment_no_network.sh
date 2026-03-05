@@ -1,9 +1,9 @@
 #!/bin/bash
 
-GLOBAL_TEMPLATE_BATCH_FILE="/sise/vaksler-group/IsanaRNA/Tal/python/NetworkAnalysis/Scripts/template_batches/global_alignment_score_template.sbatch"
-BLAST_TEMPLATE_BATCH_FILE="/sise/vaksler-group/IsanaRNA/Tal/python/NetworkAnalysis/Scripts/template_batches/blast_alignment_score_template.sbatch"
-LOCAL_TEMPLATE_BATCH_FILE="/sise/vaksler-group/IsanaRNA/Tal/python/NetworkAnalysis/Scripts/template_batches/local_alignment_score_template.sbatch"
-BATCH_RUNNER="/sise/vaksler-group/IsanaRNA/Tal/python/batch_runner.sh"
+GLOBAL_TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/global_alignment_score_template.sbatch"
+BLAST_TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/blast_alignment_score_template.sbatch"
+LOCAL_TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/local_alignment_score_template.sbatch"
+BATCH_RUNNER="/groups/vaksler_group/Tal/python/batch_runner.sh"
 TEMPLATE_BATCH_FILE=""
 
 PROTEIN=""

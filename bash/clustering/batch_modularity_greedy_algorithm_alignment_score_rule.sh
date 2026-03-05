@@ -1,6 +1,6 @@
 
-TEMPLATE_BATCH_FILE="/home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/template_batches/clustering/batch_modularity_greedy_algorithm_alignment_score_rule_batch_template.sbatch"
-BATCH_RUNNER="/home/talmalu/thesis/projects/python/batch_runner.sh"
+TEMPLATE_BATCH_FILE="/groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/template_batches/clustering/batch_modularity_greedy_algorithm_alignment_score_rule_batch_template.sbatch"
+BATCH_RUNNER="/groups/vaksler_group/Tal/python/batch_runner.sh"
 
 POSITIONAL_ARGS=()
 ALIGNMENT_WEIGHT=""

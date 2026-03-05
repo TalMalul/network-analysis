@@ -24,7 +24,7 @@ module load anaconda				### load anaconda module (must be present when working w
 source activate NewNetworkAnalysis			### activate a conda environment, replace my_env with your conda environment
 
 FILES=(###JSON_FILES###)
-python /home/talmalu/thesis/projects/python/NetworkAnalysis/Scripts/python/clustering/community_taxonomy_bar.py \
+python /groups/vaksler_group/Tal/python/NetworkAnalysis/Scripts/python/clustering/community_taxonomy_bar.py \
 --protein ###PROTEIN### \
 --xgmml_file ###XGMML_FILE### \
 --alignment_weight ###ALIGNMENT_WEIGHT### \
